@@ -36,7 +36,7 @@ label = "uv link mode"
 help = "How uv puts cached packages into a virtual environment."
 kind = "choice"
 options = ["clone", "copy", "hardlink", "symlink"]
-placeholder = "clone or hardlink"
+placeholder = "clone"
 
 [[config]]
 env = "PYTHONDONTWRITEBYTECODE"

@@ -33,9 +33,9 @@ placeholder = "~/.nuget/packages"
 [[config]]
 env = "DOTNET_CLI_UI_LANGUAGE"
 label = "Tool language"
-help = "Language of .NET CLI messages."
-options = ["en"]
-placeholder = "system language"
+help = "Language of .NET CLI messages, as a locale such as en-us."
+options = ["en-us"]
+placeholder = "not set"
 
 [[config]]
 env = "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"

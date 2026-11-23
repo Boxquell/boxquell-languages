@@ -47,7 +47,7 @@ env = "BUNDLE_JOBS"
 label = "Bundler jobs"
 help = "How many gems Bundler installs in parallel."
 kind = "number"
-placeholder = "1"
+placeholder = "number of CPUs"
 
 [[config]]
 env = "BUNDLE_WITHOUT"

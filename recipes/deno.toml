@@ -31,7 +31,7 @@ placeholder = "https://registry.npmjs.org"
 env = "DENO_DIR"
 label = "Cache folder"
 help = "Where Deno keeps its cache."
-placeholder = "the system cache folder"
+placeholder = "~/.cache/deno"
 
 [[config]]
 env = "DENO_NO_UPDATE_CHECK"

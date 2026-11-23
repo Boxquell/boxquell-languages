@@ -47,7 +47,7 @@ options = ["dev", "test", "prod"]
 placeholder = "dev"
 
 [[config]]
-env = "HEX_MIRROR"
+env = "HEX_MIRROR_URL"
 label = "Hex mirror"
 help = "Where Hex downloads packages from."
 options = ["https://repo.hex.pm"]
