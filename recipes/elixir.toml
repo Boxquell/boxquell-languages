@@ -32,3 +32,6 @@ for tool in elixir elixirc iex mix; do sudo ln -sf "/usr/local/elixir/bin/$tool"
 mix local.hex --force
 elixir --version | tail -n1
 '''
+
+[env]
+ELIXIR_ERL_OPTIONS = "+fnu"
