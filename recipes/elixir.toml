@@ -19,7 +19,10 @@ otp=$(curl -fsSL "$base/otp/$otp_dir/builds.txt" | cut -d' ' -f1 | grep '^OTP-28
 # The newest patch release of the chosen minor version built for OTP 28.
 ex=$(curl -fsSL "$base/elixir/builds.txt" | cut -d' ' -f1 | grep "^v$BOXQUELL_VERSION\.[0-9]*-otp-28\$" | sort -V | tail -n1)
 [ -n "$ex" ] || { echo "no Elixir $BOXQUELL_VERSION build for OTP 28 found" >&2; exit 1; }
-cd "$(mktemp -d)"
+# Downloads go to the disk and are removed again, also when something fails.
+work=$(mktemp -d -p /var/tmp)
+trap 'rm -rf "$work"' EXIT
+cd "$work"
 curl -fsSLo otp.tar.gz "$base/otp/$otp_dir/$otp.tar.gz"
 sudo rm -rf /usr/local/erlang
 sudo mkdir /usr/local/erlang

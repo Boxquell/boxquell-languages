@@ -12,7 +12,10 @@ case "$(uname -m)" in x86_64) arch=amd64 ;; aarch64) arch=arm64 ;; *) echo "unsu
 # The newest patch release of the chosen minor version.
 version=$(curl -fsSL 'https://go.dev/dl/?mode=json&include=all' | grep -o "\"version\": \"go$BOXQUELL_VERSION\(\.[0-9]*\)\?\"" | cut -d'"' -f4 | sort -V | tail -n1)
 [ -n "$version" ] || { echo "no Go $BOXQUELL_VERSION release found" >&2; exit 1; }
-cd "$(mktemp -d)"
+# Downloads go to the disk and are removed again, also when something fails.
+work=$(mktemp -d -p /var/tmp)
+trap 'rm -rf "$work"' EXIT
+cd "$work"
 curl -fsSLO "https://go.dev/dl/$version.linux-$arch.tar.gz"
 sudo rm -rf /usr/local/go
 sudo tar -xzf "$version.linux-$arch.tar.gz" -C /usr/local

@@ -10,7 +10,10 @@ allow = ["registry.npmjs.org"]
 install = '''
 case "$(uname -m)" in x86_64) arch=x64 ;; aarch64) arch=arm64 ;; *) echo "unsupported CPU" >&2; exit 1 ;; esac
 base=https://nodejs.org/dist/latest-v$BOXQUELL_VERSION.x
-cd "$(mktemp -d)"
+# Downloads go to the disk and are removed again, also when something fails.
+work=$(mktemp -d -p /var/tmp)
+trap 'rm -rf "$work"' EXIT
+cd "$work"
 curl -fsSL "$base/SHASUMS256.txt" | grep "linux-$arch.tar.gz\$" > sums
 file=$(cut -d' ' -f3 sums)
 curl -fsSLO "$base/$file"

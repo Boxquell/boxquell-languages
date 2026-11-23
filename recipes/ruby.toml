@@ -18,7 +18,10 @@ line=$(curl -fsSL https://cache.ruby-lang.org/pub/ruby/index.txt | awk -F'\t' -v
 [ -n "$line" ] || { echo "no Ruby $BOXQUELL_VERSION release found" >&2; exit 1; }
 url=$(echo "$line" | cut -f2)
 sha=$(echo "$line" | cut -f4)
-cd "$(mktemp -d)"
+# Downloads go to the disk and are removed again, also when something fails.
+work=$(mktemp -d -p /var/tmp)
+trap 'rm -rf "$work"' EXIT
+cd "$work"
 curl -fsSLo ruby.tar.xz "$url"
 echo "$sha  ruby.tar.xz" | sha256sum -c -
 tar -xJf ruby.tar.xz --strip-components=1

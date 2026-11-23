@@ -15,7 +15,10 @@ index=$(curl -fsSL https://ziglang.org/download/index.json)
 version=$(echo "$index" | grep -o "\"$BOXQUELL_VERSION\.[0-9]*\": *{" | grep -o "[0-9][0-9.]*" | sort -V | tail -n1)
 [ -n "$version" ] || { echo "no Zig $BOXQUELL_VERSION release found" >&2; exit 1; }
 sha=$(echo "$index" | tr -d '\n ' | grep -o "\"$version\":{.*" | grep -o "\"$arch-linux\":{[^}]*}" | head -n1 | sed -n 's/.*"shasum":"\([0-9a-f]*\)".*/\1/p')
-cd "$(mktemp -d)"
+# Downloads go to the disk and are removed again, also when something fails.
+work=$(mktemp -d -p /var/tmp)
+trap 'rm -rf "$work"' EXIT
+cd "$work"
 curl -fsSLo zig.tar.xz "https://ziglang.org/download/$version/zig-$arch-linux-$version.tar.xz"
 echo "$sha  zig.tar.xz" | sha256sum -c -
 sudo rm -rf /usr/local/zig
