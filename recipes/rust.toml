@@ -1,6 +1,7 @@
 name = "Rust"
 category = "language"
 description = "Stable Rust via rustup (`cargo`, `rustc`)"
+os = ["debian", "ubuntu"]
 requires = ["build-essential"]
 install_allow = ["sh.rustup.rs", "static.rust-lang.org"]
 allow = ["crates.io", "index.crates.io", "static.crates.io"]

@@ -1,6 +1,7 @@
 name = "Go"
 category = "language"
 description = "Go toolchain in /usr/local/go"
+os = ["debian", "ubuntu"]
 versions = ["1.27", "1.26", "1.25"]
 install_allow = ["go.dev", "dl.google.com"]
 allow = ["proxy.golang.org", "sum.golang.org"]

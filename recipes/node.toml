@@ -1,6 +1,7 @@
 name = "Node.js"
 category = "language"
 description = "Node.js with npm, installed to /usr/local"
+os = ["debian", "ubuntu"]
 versions = ["24", "26", "22", "20"]
 install_allow = ["nodejs.org"]
 allow = ["registry.npmjs.org"]
