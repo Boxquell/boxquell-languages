@@ -22,10 +22,13 @@ boxquell repo update languages          # fetch the latest recipes
 | `kotlin` | 2.4, 2.3, 2.2 (installs `java`) |
 | `lua` | 5.5, 5.4 (built from source) |
 | `dotnet` | 10.0, 11.0 (.NET SDK) |
-| `deno` | latest release |
-| `bun` | latest release |
 | `elixir` | 1.20, 1.19, 1.18 (with Erlang/OTP 28) |
 | `zig` | 0.17, 0.16, 0.15 |
+| `dart` | latest stable release (with pub) |
+| `c` | gcc and clang from Debian (with make, gdb and valgrind) |
+| `cpp` | g++ and clang++ from Debian (installs `cmake`; with Ninja, gdb, clang-format and clang-tidy) |
+| `perl` | Perl from Debian (with cpanminus) |
+| `pascal` | Free Pascal from Debian |
 
 Choose a version with `<recipe>@<version>`. Rust, Ruby and Lua need the C build tools from the [tools](https://github.com/Boxquell/boxquell-tools) repository.
 

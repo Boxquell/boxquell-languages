@@ -1,0 +1,49 @@
+name = "C++"
+category = "language"
+description = "g++ and clang++ with CMake, Ninja, gdb, clang-format and clang-tidy"
+icon = "cplusplus.svg"
+icon_color = "#00599C"
+os = ["debian", "ubuntu"]
+requires = ["build-essential", "cmake"]
+install_allow = ["@packages"]
+install = '''
+# g++ comes with build-essential and CMake with its own recipe; this adds clang and the usual companions.
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends clang clang-format clang-tidy gdb ninja-build
+g++ --version | head -n1
+clang++ --version | head -n1
+'''
+uninstall = '''
+sudo DEBIAN_FRONTEND=noninteractive apt-get remove -y -q clang clang-format clang-tidy gdb ninja-build
+'''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "CXX"
+label = "C++ compiler"
+help = "The compiler that CMake, make and most build systems call."
+kind = "choice"
+options = ["g++", "clang++"]
+placeholder = "g++"
+
+[[config]]
+env = "CXXFLAGS"
+label = "Compiler flags"
+help = "Flags that most build systems add to every compiler call."
+options = ["-O2 -Wall -Wextra", "-O0 -g"]
+placeholder = "none"
+
+[[config]]
+env = "CMAKE_GENERATOR"
+label = "CMake generator"
+help = "The build tool CMake writes files for."
+kind = "choice"
+options = ["Ninja", "Unix Makefiles"]
+placeholder = "Unix Makefiles"
+
+[[config]]
+env = "CMAKE_BUILD_PARALLEL_LEVEL"
+label = "Parallel build jobs"
+help = "How many compile jobs a CMake build runs at once."
+kind = "number"
+placeholder = "the build tool's default"

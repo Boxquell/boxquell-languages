@@ -1,0 +1,34 @@
+name = "C"
+category = "language"
+description = "gcc and clang with make, the gdb debugger and valgrind"
+icon = "c.svg"
+icon_color = "#A8B9CC"
+os = ["debian", "ubuntu"]
+requires = ["build-essential"]
+install_allow = ["@packages"]
+install = '''
+# The compilers come with build-essential; this adds clang, a debugger and a memory checker.
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends clang gdb valgrind
+gcc --version | head -n1
+clang --version | head -n1
+'''
+uninstall = '''
+sudo DEBIAN_FRONTEND=noninteractive apt-get remove -y -q clang gdb valgrind
+'''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "CC"
+label = "C compiler"
+help = "The compiler that make and most build systems call."
+kind = "choice"
+options = ["gcc", "clang"]
+placeholder = "gcc"
+
+[[config]]
+env = "CFLAGS"
+label = "Compiler flags"
+help = "Flags that make and most build systems add to every compiler call."
+options = ["-O2 -Wall -Wextra", "-O0 -g"]
+placeholder = "none"

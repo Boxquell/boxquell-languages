@@ -1,0 +1,30 @@
+name = "Perl"
+category = "language"
+description = "Perl from Debian with cpanminus for modules from CPAN"
+icon = "perl.svg"
+icon_color = "#0073A1"
+os = ["debian", "ubuntu"]
+requires = ["build-essential"]
+install_allow = ["@packages"]
+allow = ["cpanmetadb.plackperl.org", "fastapi.metacpan.org", "cpan.metacpan.org", "www.cpan.org"]
+install = '''
+# The full Perl with its documentation, cpanm, and local::lib so modules install into the home folder.
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends perl perl-doc cpanminus liblocal-lib-perl
+# Modules installed with cpanm go to ~/perl5 and are found from there.
+printf 'eval "$(perl -Mlocal::lib=--no-create)"\n' | sudo tee /etc/profile.d/perl-local-lib.sh >/dev/null
+perl -e 'print "Perl $^V\n"'
+cpanm --version | head -n1
+'''
+uninstall = '''
+sudo DEBIAN_FRONTEND=noninteractive apt-get remove -y -q perl-doc cpanminus liblocal-lib-perl
+sudo rm -f /etc/profile.d/perl-local-lib.sh
+'''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "PERL_CPANM_OPT"
+label = "cpanm options"
+help = "Options added to every cpanm call."
+options = ["--notest", "--quiet"]
+placeholder = "none"

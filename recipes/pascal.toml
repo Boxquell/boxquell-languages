@@ -1,0 +1,16 @@
+name = "Free Pascal"
+category = "language"
+description = "Free Pascal compiler (`fpc`) with its units, from Debian"
+icon = "pascal.svg"
+icon_color = "#1F6FB5"
+os = ["debian", "ubuntu"]
+install_allow = ["@packages"]
+install = '''
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends fpc
+fpc -iV
+'''
+uninstall = '''
+sudo DEBIAN_FRONTEND=noninteractive apt-get remove -y -q fpc
+sudo DEBIAN_FRONTEND=noninteractive apt-get autoremove -y -q
+'''
