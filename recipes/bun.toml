@@ -2,6 +2,7 @@ name = "Bun"
 category = "language"
 description = "Bun runtime, package manager and bundler for JavaScript and TypeScript"
 icon = "bun.svg"
+icon_color = "#000000"
 os = ["debian", "ubuntu"]
 install_allow = ["@packages", "github.com", "*.githubusercontent.com"]
 allow = ["registry.npmjs.org"]

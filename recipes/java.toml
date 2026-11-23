@@ -2,6 +2,7 @@ name = "Java"
 category = "language"
 description = "Eclipse Temurin JDK with Maven and Gradle"
 icon = "openjdk.svg"
+icon_color = "#000000"
 os = ["debian", "ubuntu"]
 versions = ["25", "21", "17"]
 install_allow = ["@packages", "api.adoptium.net", "github.com", "*.githubusercontent.com", "repo.maven.apache.org", "services.gradle.org", "downloads.gradle.org"]

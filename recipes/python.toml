@@ -3,6 +3,7 @@ category = "language"
 versions = ["3.15", "3.14", "3.13", "3.12"]
 description = "Python 3 managed by uv (`python3`, `uv`, `uvx`)"
 icon = "python.svg"
+icon_color = "#3776AB"
 os = ["debian", "ubuntu"]
 install_allow = ["astral.sh", "*.astral.sh", "github.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com"]
 allow = ["pypi.org", "files.pythonhosted.org"]

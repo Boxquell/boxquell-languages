@@ -2,6 +2,7 @@ name = "Ruby"
 category = "language"
 description = "Ruby with gem and bundler, built from source into /usr/local"
 icon = "ruby.svg"
+icon_color = "#CC342D"
 os = ["debian", "ubuntu"]
 versions = ["4.0", "3.4", "3.3"]
 requires = ["build-essential"]

@@ -2,6 +2,7 @@ name = "Lua"
 category = "language"
 description = "Lua interpreter and compiler, built from source into /usr/local"
 icon = "lua.svg"
+icon_color = "#000080"
 os = ["debian", "ubuntu"]
 versions = ["5.5", "5.4"]
 requires = ["build-essential"]

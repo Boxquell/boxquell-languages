@@ -2,6 +2,7 @@ name = "Zig"
 category = "language"
 description = "Zig compiler and build system in /usr/local/zig"
 icon = "zig.svg"
+icon_color = "#F7A41D"
 os = ["debian", "ubuntu"]
 versions = ["0.17", "0.16", "0.15"]
 install_allow = ["@packages", "ziglang.org"]

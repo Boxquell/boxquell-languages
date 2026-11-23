@@ -2,6 +2,7 @@ name = "Node.js"
 category = "language"
 description = "Node.js with npm, installed to /usr/local"
 icon = "nodedotjs.svg"
+icon_color = "#5FA04E"
 os = ["debian", "ubuntu"]
 versions = ["24", "26", "22", "20"]
 install_allow = ["nodejs.org"]

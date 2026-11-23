@@ -2,6 +2,7 @@ name = "Deno"
 category = "language"
 description = "Deno runtime for TypeScript and JavaScript"
 icon = "deno.svg"
+icon_color = "#000000"
 os = ["debian", "ubuntu"]
 install_allow = ["@packages", "dl.deno.land"]
 allow = ["jsr.io", "deno.land", "registry.npmjs.org"]

@@ -2,6 +2,7 @@ name = ".NET"
 category = "language"
 description = ".NET SDK with the `dotnet` command, in /usr/local/dotnet"
 icon = "dotnet.svg"
+icon_color = "#512BD4"
 os = ["debian", "ubuntu"]
 versions = ["10.0", "11.0"]
 install_allow = ["@packages", "dot.net", "builds.dotnet.microsoft.com", "ci.dot.net", "dotnetcli.azureedge.net", "dotnetcli.blob.core.windows.net"]

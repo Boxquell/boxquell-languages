@@ -2,6 +2,7 @@ name = "Elixir"
 category = "language"
 description = "Elixir with Erlang/OTP 28 and Mix, from the precompiled builds of builds.hex.pm"
 icon = "elixir.svg"
+icon_color = "#8847B9"
 os = ["debian", "ubuntu"]
 versions = ["1.20", "1.19", "1.18"]
 install_allow = ["@packages", "builds.hex.pm"]

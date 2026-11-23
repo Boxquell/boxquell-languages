@@ -2,6 +2,7 @@ name = "PHP"
 category = "language"
 description = "PHP command line with common extensions, from packages.sury.org"
 icon = "php.svg"
+icon_color = "#777BB4"
 versions = ["8.5", "8.4", "8.3", "8.2"]
 install_allow = ["@packages", "packages.sury.org"]
 install = '''
