@@ -18,7 +18,12 @@ sudo rm -rf /usr/local/jdk
 sudo mkdir /usr/local/jdk
 sudo tar -xzf jdk.tar.gz -C /usr/local/jdk --strip-components=1 --no-same-owner
 printf 'export JAVA_HOME=/usr/local/jdk\n' | sudo tee /etc/profile.d/java.sh >/dev/null
-for tool in java javac jar jshell; do sudo ln -sf "/usr/local/jdk/bin/$tool" /usr/local/bin/; done
+for tool in java javac jar jshell keytool; do sudo ln -sf "/usr/local/jdk/bin/$tool" /usr/local/bin/; done
+# The JDK has its own list of trusted certificates. Without the sandbox's certificate in it, Java refuses
+# every connection Boxquell looks into: hosts that get a key, and hosts that are open for reading only.
+if [ -f /run/boxquell/ca.crt ]; then
+  sudo /usr/local/jdk/bin/keytool -importcert -noprompt -cacerts -storepass changeit -alias boxquell -file /run/boxquell/ca.crt >/dev/null
+fi
 # The newest stable Maven 3.
 mvn_base=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven
 mvn=$(curl -fsSL "$mvn_base/maven-metadata.xml" | sed -n 's|.*<version>\(3\.[0-9.]*\)</version>.*|\1|p' | sort -V | tail -n1)
