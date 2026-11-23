@@ -26,6 +26,10 @@ boxquell repo update languages          # fetch the latest recipes
 | `bun` | latest release |
 | `elixir` | 1.20, 1.19, 1.18 (with Erlang/OTP 28) |
 | `zig` | 0.17, 0.16, 0.15 |
+| `pnpm` | latest release (installs `node`) |
+| `yarn` | latest stable, through Corepack (installs `node`) |
+| `cmake` | latest release |
+| `just` | latest release |
 
 Choose a version with `<recipe>@<version>`. Rust, Ruby and Lua need the C build tools from the [tools](https://github.com/Boxquell/boxquell-tools) repository.
 
