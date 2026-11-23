@@ -1,6 +1,6 @@
 # boxquell-languages
 
-Official language recipes for [Boxquell](https://github.com/ToBee94/boxquell). Boxquell adds this repository by itself on first use.
+Official language recipes for [Boxquell](https://github.com/Boxquell/boxquell). Boxquell adds this repository by itself on first use.
 
 ```sh
 boxquell recipes                      # everything that can be installed
@@ -18,11 +18,11 @@ boxquell repo update languages          # fetch the latest recipes
 | `php` | 8.5, 8.4, 8.3, 8.2 (command line with common extensions) |
 | `rust` | stable (rustup) |
 
-Choose a version with `<recipe>@<version>`. Rust needs the C build tools from the [tools](https://github.com/ToBee94/boxquell-tools) repository.
+Choose a version with `<recipe>@<version>`. Rust needs the C build tools from the [tools](https://github.com/Boxquell/boxquell-tools) repository.
 
 ## Contributing
 
-One TOML file per recipe in `recipes/`. The format is described in [docs/recipes.md](https://github.com/ToBee94/boxquell/blob/main/docs/recipes.md); the workflow in this repository checks every file.
+One TOML file per recipe in `recipes/`. The format is described in [docs/recipes.md](https://github.com/Boxquell/boxquell/blob/main/docs/recipes.md); the workflow in this repository checks every file.
 
 ## License
 
