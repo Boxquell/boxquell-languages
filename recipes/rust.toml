@@ -1,0 +1,11 @@
+name = "Rust"
+category = "language"
+description = "Stable Rust via rustup (`cargo`, `rustc`)"
+requires = ["build-essential"]
+install_allow = ["sh.rustup.rs", "static.rust-lang.org"]
+allow = ["crates.io", "index.crates.io", "static.crates.io"]
+install = '''
+curl --proto '=https' --tlsv1.2 -fsSL https://sh.rustup.rs | sh -s -- -y --profile minimal --no-modify-path
+echo 'export PATH="$HOME/.cargo/bin:$PATH"' | sudo tee /etc/profile.d/cargo.sh >/dev/null
+"$HOME/.cargo/bin/cargo" --version
+'''

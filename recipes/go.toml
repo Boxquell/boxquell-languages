@@ -1,0 +1,18 @@
+name = "Go"
+category = "language"
+description = "Go toolchain in /usr/local/go"
+versions = ["1.27", "1.26", "1.25"]
+install_allow = ["go.dev", "dl.google.com"]
+allow = ["proxy.golang.org", "sum.golang.org"]
+install = '''
+case "$(uname -m)" in x86_64) arch=amd64 ;; aarch64) arch=arm64 ;; *) echo "unsupported CPU" >&2; exit 1 ;; esac
+# The newest patch release of the chosen minor version.
+version=$(curl -fsSL 'https://go.dev/dl/?mode=json&include=all' | grep -o "\"version\": \"go$BOXQUELL_VERSION\(\.[0-9]*\)\?\"" | cut -d'"' -f4 | sort -V | tail -n1)
+[ -n "$version" ] || { echo "no Go $BOXQUELL_VERSION release found" >&2; exit 1; }
+cd "$(mktemp -d)"
+curl -fsSLO "https://go.dev/dl/$version.linux-$arch.tar.gz"
+sudo rm -rf /usr/local/go
+sudo tar -xzf "$version.linux-$arch.tar.gz" -C /usr/local
+sudo ln -sf /usr/local/go/bin/go /usr/local/go/bin/gofmt /usr/local/bin/
+go version
+'''

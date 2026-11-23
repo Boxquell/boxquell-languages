@@ -1,0 +1,17 @@
+name = "Node.js"
+category = "language"
+description = "Node.js with npm, installed to /usr/local"
+versions = ["24", "26", "22", "20"]
+install_allow = ["nodejs.org"]
+allow = ["registry.npmjs.org"]
+install = '''
+case "$(uname -m)" in x86_64) arch=x64 ;; aarch64) arch=arm64 ;; *) echo "unsupported CPU" >&2; exit 1 ;; esac
+base=https://nodejs.org/dist/latest-v$BOXQUELL_VERSION.x
+cd "$(mktemp -d)"
+curl -fsSL "$base/SHASUMS256.txt" | grep "linux-$arch.tar.gz\$" > sums
+file=$(cut -d' ' -f3 sums)
+curl -fsSLO "$base/$file"
+sha256sum -c sums
+sudo tar -xzf "$file" -C /usr/local --strip-components=1 --no-same-owner
+node --version
+'''

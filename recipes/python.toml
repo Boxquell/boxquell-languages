@@ -1,0 +1,13 @@
+name = "Python"
+category = "language"
+versions = ["3.15", "3.14", "3.13", "3.12"]
+description = "Python 3 managed by uv (`python3`, `uv`, `uvx`)"
+install_allow = ["astral.sh", "*.astral.sh", "github.com", "release-assets.githubusercontent.com", "objects.githubusercontent.com"]
+allow = ["pypi.org", "files.pythonhosted.org"]
+install = '''
+curl -LsSf https://astral.sh/uv/install.sh | sudo env UV_INSTALL_DIR=/usr/local/bin UV_NO_MODIFY_PATH=1 sh
+sudo env UV_PYTHON_INSTALL_DIR=/opt/python UV_PYTHON_BIN_DIR=/usr/local/bin uv python install --default "$BOXQUELL_VERSION"
+python3 --version
+'''
+[env]
+UV_PYTHON_INSTALL_DIR = "/opt/python"
