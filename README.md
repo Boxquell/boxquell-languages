@@ -15,6 +15,7 @@ boxquell repo update languages          # fetch the latest recipes
 | `node` | 24, 26, 22, 20 |
 | `python` | 3.15, 3.14, 3.13, 3.12 (managed by uv) |
 | `go` | 1.27, 1.26, 1.25 |
+| `php` | 8.5, 8.4, 8.3, 8.2 (command line with common extensions) |
 | `rust` | stable (rustup) |
 
 Choose a version with `<recipe>@<version>`. Rust needs the C build tools from the [tools](https://github.com/ToBee94/boxquell-tools) repository.

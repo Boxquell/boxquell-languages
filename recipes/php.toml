@@ -1,0 +1,18 @@
+name = "PHP"
+category = "language"
+description = "PHP command line with common extensions, from packages.sury.org"
+versions = ["8.5", "8.4", "8.3", "8.2"]
+install_allow = ["deb.debian.org", "security.debian.org", "packages.sury.org"]
+install = '''
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends ca-certificates curl unzip
+sudo curl -fsSLo /usr/share/keyrings/deb.sury.org-php.gpg https://packages.sury.org/php/apt.gpg
+codename=$(. /etc/os-release && echo "$VERSION_CODENAME")
+echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] https://packages.sury.org/php/ $codename main" | sudo tee /etc/apt/sources.list.d/php.list >/dev/null
+sudo apt-get update -q
+v=$BOXQUELL_VERSION
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends \
+  "php$v-cli" "php$v-mbstring" "php$v-xml" "php$v-curl" "php$v-zip" "php$v-intl"
+sudo update-alternatives --set php "/usr/bin/php$v"
+php --version | head -n1
+'''
