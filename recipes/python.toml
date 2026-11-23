@@ -14,3 +14,44 @@ python3 --version
 '''
 [env]
 UV_PYTHON_INSTALL_DIR = "/opt/python"
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "PIP_INDEX_URL"
+label = "pip package index"
+help = "Where pip downloads packages from."
+options = ["https://pypi.org/simple"]
+placeholder = "https://pypi.org/simple"
+
+[[config]]
+env = "UV_DEFAULT_INDEX"
+label = "uv package index"
+help = "Where uv downloads packages from."
+options = ["https://pypi.org/simple"]
+placeholder = "https://pypi.org/simple"
+
+[[config]]
+env = "UV_LINK_MODE"
+label = "uv link mode"
+help = "How uv puts cached packages into a virtual environment."
+kind = "choice"
+options = ["clone", "copy", "hardlink", "symlink"]
+placeholder = "clone or hardlink"
+
+[[config]]
+env = "PYTHONDONTWRITEBYTECODE"
+label = "No bytecode files"
+help = "Do not write .pyc files."
+kind = "switch"
+
+[[config]]
+env = "PYTHONUNBUFFERED"
+label = "Unbuffered output"
+help = "Show Python output at once instead of in blocks."
+kind = "switch"
+
+[[config]]
+env = "PYTHONUTF8"
+label = "Force UTF-8"
+help = "Use UTF-8 for text regardless of the locale."
+kind = "switch"

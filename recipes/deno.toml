@@ -18,3 +18,37 @@ sudo unzip -qo deno.zip -d /usr/local/bin
 sudo chmod 0755 /usr/local/bin/deno
 deno --version | head -n1
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "NPM_CONFIG_REGISTRY"
+label = "Package registry"
+help = "Where Deno downloads npm packages from."
+options = ["https://registry.npmjs.org"]
+placeholder = "https://registry.npmjs.org"
+
+[[config]]
+env = "DENO_DIR"
+label = "Cache folder"
+help = "Where Deno keeps its cache."
+placeholder = "the system cache folder"
+
+[[config]]
+env = "DENO_NO_UPDATE_CHECK"
+label = "No update check"
+help = "Do not check for a newer Deno."
+kind = "switch"
+on = "1"
+
+[[config]]
+env = "DENO_NO_PROMPT"
+label = "No permission prompts"
+help = "Fail instead of asking for a permission."
+kind = "switch"
+on = "1"
+
+[[config]]
+env = "NO_COLOR"
+label = "No colors"
+help = "Turn off colored output."
+kind = "switch"

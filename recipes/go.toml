@@ -19,3 +19,39 @@ sudo tar -xzf "$version.linux-$arch.tar.gz" -C /usr/local
 sudo ln -sf /usr/local/go/bin/go /usr/local/go/bin/gofmt /usr/local/bin/
 go version
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "GOPROXY"
+label = "Module proxy"
+help = "Where Go downloads modules from."
+options = ["https://proxy.golang.org,direct"]
+placeholder = "https://proxy.golang.org,direct"
+
+[[config]]
+env = "GOPRIVATE"
+label = "Private modules"
+help = "Comma-separated module path patterns fetched directly, not through the proxy."
+placeholder = "none"
+
+[[config]]
+env = "GOFLAGS"
+label = "Default flags"
+help = "Flags added to every go command."
+options = ["-mod=readonly"]
+placeholder = "none"
+
+[[config]]
+env = "GOTOOLCHAIN"
+label = "Toolchain"
+help = "Whether Go may download a newer toolchain when a module asks for one."
+kind = "choice"
+options = ["local", "auto"]
+placeholder = "auto"
+
+[[config]]
+env = "GOMAXPROCS"
+label = "Parallel threads"
+help = "How many CPUs Go programs use at once."
+kind = "number"
+placeholder = "all CPUs"

@@ -12,3 +12,41 @@ curl --proto '=https' --tlsv1.2 -fsSL https://sh.rustup.rs | sh -s -- -y --profi
 echo 'export PATH="$HOME/.cargo/bin:$PATH"' | sudo tee /etc/profile.d/cargo.sh >/dev/null
 "$HOME/.cargo/bin/cargo" --version
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "CARGO_TERM_COLOR"
+label = "Cargo colors"
+help = "When Cargo colors its output."
+kind = "choice"
+options = ["auto", "always", "never"]
+placeholder = "auto"
+
+[[config]]
+env = "RUSTFLAGS"
+label = "Compiler flags"
+help = "Extra flags for every rustc call."
+options = ["-C target-cpu=native"]
+placeholder = "none"
+
+[[config]]
+env = "CARGO_BUILD_JOBS"
+label = "Build jobs"
+help = "How many compile jobs run in parallel."
+kind = "number"
+placeholder = "number of CPUs"
+
+[[config]]
+env = "RUST_BACKTRACE"
+label = "Backtraces"
+help = "How much a panic shows of where it happened."
+kind = "choice"
+options = ["0", "1", "full"]
+placeholder = "0"
+
+[[config]]
+env = "CARGO_NET_GIT_FETCH_WITH_CLI"
+label = "Fetch with git"
+help = "Let Cargo use the git command for git dependencies."
+kind = "switch"
+on = "true"

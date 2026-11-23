@@ -18,3 +18,24 @@ sha256sum -c sums
 sudo tar -xzf "$file" -C /usr/local --strip-components=1 --no-same-owner
 node --version
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "NODE_OPTIONS"
+label = "Node options"
+help = "Command line options passed to every Node process."
+options = ["--max-old-space-size=4096"]
+placeholder = "none"
+
+[[config]]
+env = "NPM_CONFIG_REGISTRY"
+label = "Package registry"
+help = "Where npm downloads packages from."
+options = ["https://registry.npmjs.org"]
+placeholder = "https://registry.npmjs.org"
+
+[[config]]
+env = "NODE_NO_WARNINGS"
+label = "No warnings"
+help = "Hide process warnings such as deprecation notices."
+kind = "switch"

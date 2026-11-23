@@ -22,3 +22,32 @@ dotnet --version
 DOTNET_ROOT = "/usr/local/dotnet"
 DOTNET_CLI_TELEMETRY_OPTOUT = "1"
 DOTNET_NOLOGO = "1"
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "NUGET_PACKAGES"
+label = "NuGet package folder"
+help = "Where NuGet keeps downloaded packages."
+placeholder = "~/.nuget/packages"
+
+[[config]]
+env = "DOTNET_CLI_UI_LANGUAGE"
+label = "Tool language"
+help = "Language of .NET CLI messages."
+options = ["en"]
+placeholder = "system language"
+
+[[config]]
+env = "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"
+label = "Invariant globalization"
+help = "Run without ICU culture data."
+kind = "switch"
+on = "1"
+
+[[config]]
+env = "ASPNETCORE_ENVIRONMENT"
+label = "ASP.NET environment"
+help = "Which environment an ASP.NET Core app runs as."
+kind = "choice"
+options = ["Development", "Staging", "Production"]
+placeholder = "Production"

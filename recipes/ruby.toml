@@ -27,3 +27,31 @@ make -j"$(nproc)"
 sudo make install
 ruby --version
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "RUBYOPT"
+label = "Ruby options"
+help = "Command line options passed to every Ruby process."
+options = ["-W0"]
+placeholder = "none"
+
+[[config]]
+env = "RUBY_YJIT_ENABLE"
+label = "Enable YJIT"
+help = "Turn on the YJIT compiler."
+kind = "switch"
+
+[[config]]
+env = "BUNDLE_JOBS"
+label = "Bundler jobs"
+help = "How many gems Bundler installs in parallel."
+kind = "number"
+placeholder = "1"
+
+[[config]]
+env = "BUNDLE_WITHOUT"
+label = "Skipped groups"
+help = "Gem groups Bundler does not install, separated by colons."
+options = ["development:test"]
+placeholder = "none"

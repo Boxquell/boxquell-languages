@@ -18,3 +18,30 @@ sudo install -m 0755 "bun-linux-$arch/bun" /usr/local/bin/bun
 sudo ln -sf bun /usr/local/bin/bunx
 bun --version
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "BUN_CONFIG_MAX_HTTP_REQUESTS"
+label = "Parallel downloads"
+help = "How many HTTP requests bun install runs at once."
+kind = "number"
+placeholder = "64"
+
+[[config]]
+env = "DO_NOT_TRACK"
+label = "No usage reports"
+help = "Do not upload crash reports or telemetry."
+kind = "switch"
+
+[[config]]
+env = "NO_COLOR"
+label = "No colors"
+help = "Turn off colored output."
+kind = "switch"
+
+[[config]]
+env = "BUN_CONFIG_NO_CLEAR_TERMINAL_ON_RELOAD"
+label = "Keep screen on reload"
+help = "Do not clear the terminal when bun --watch reloads."
+kind = "switch"
+on = "true"

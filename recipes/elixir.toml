@@ -36,3 +36,25 @@ elixir --version | tail -n1
 
 [env]
 ELIXIR_ERL_OPTIONS = "+fnu"
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "MIX_ENV"
+label = "Mix environment"
+help = "Which environment Mix builds for."
+kind = "choice"
+options = ["dev", "test", "prod"]
+placeholder = "dev"
+
+[[config]]
+env = "HEX_MIRROR"
+label = "Hex mirror"
+help = "Where Hex downloads packages from."
+options = ["https://repo.hex.pm"]
+placeholder = "https://repo.hex.pm"
+
+[[config]]
+env = "MIX_DEBUG"
+label = "Mix debug output"
+help = "Print each Mix task as it runs."
+kind = "switch"

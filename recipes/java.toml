@@ -41,3 +41,38 @@ java -version 2>&1 | head -n1
 mvn --version | head -n1
 gradle --version | grep '^Gradle'
 '''
+
+# Settings on a sandbox's Config tab; each is an environment variable.
+[[config]]
+env = "JAVA_TOOL_OPTIONS"
+label = "JVM options"
+help = "Options picked up by every JVM that starts."
+options = ["-Xmx2g"]
+placeholder = "none"
+
+[[config]]
+env = "MAVEN_OPTS"
+label = "Maven JVM options"
+help = "Options for the JVM that runs Maven."
+options = ["-Xmx1g"]
+placeholder = "none"
+
+[[config]]
+env = "MAVEN_ARGS"
+label = "Maven arguments"
+help = "Arguments added to every mvn call."
+options = ["--batch-mode"]
+placeholder = "none"
+
+[[config]]
+env = "GRADLE_OPTS"
+label = "Gradle JVM options"
+help = "Options for the JVM that runs the Gradle client."
+options = ["-Xmx1g"]
+placeholder = "none"
+
+[[config]]
+env = "GRADLE_USER_HOME"
+label = "Gradle home"
+help = "Where Gradle keeps its caches and settings."
+placeholder = "~/.gradle"
