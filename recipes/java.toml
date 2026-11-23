@@ -1,0 +1,42 @@
+name = "Java"
+category = "language"
+description = "Eclipse Temurin JDK with Maven and Gradle"
+icon = "openjdk.svg"
+os = ["debian", "ubuntu"]
+versions = ["25", "21", "17"]
+install_allow = ["@packages", "api.adoptium.net", "github.com", "*.githubusercontent.com", "repo.maven.apache.org", "services.gradle.org", "downloads.gradle.org"]
+allow = ["repo.maven.apache.org", "repo1.maven.org", "plugins.gradle.org", "services.gradle.org", "downloads.gradle.org", "plugins-artifacts.gradle.org"]
+install = '''
+# JDK from Adoptium (the chosen LTS release), Maven from Maven Central and Gradle from gradle.org.
+case "$(uname -m)" in x86_64) arch=x64 ;; aarch64) arch=aarch64 ;; *) echo "unsupported CPU" >&2; exit 1 ;; esac
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends ca-certificates curl unzip
+cd "$(mktemp -d)"
+curl -fsSLo jdk.tar.gz "https://api.adoptium.net/v3/binary/latest/$BOXQUELL_VERSION/ga/linux/$arch/jdk/hotspot/normal/eclipse"
+sudo rm -rf /usr/local/jdk
+sudo mkdir /usr/local/jdk
+sudo tar -xzf jdk.tar.gz -C /usr/local/jdk --strip-components=1 --no-same-owner
+printf 'export JAVA_HOME=/usr/local/jdk\n' | sudo tee /etc/profile.d/java.sh >/dev/null
+for tool in java javac jar jshell; do sudo ln -sf "/usr/local/jdk/bin/$tool" /usr/local/bin/; done
+# The newest stable Maven 3.
+mvn_base=https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven
+mvn=$(curl -fsSL "$mvn_base/maven-metadata.xml" | sed -n 's|.*<version>\(3\.[0-9.]*\)</version>.*|\1|p' | sort -V | tail -n1)
+[ -n "$mvn" ] || { echo "no Maven release found" >&2; exit 1; }
+curl -fsSLo maven.tar.gz "$mvn_base/$mvn/apache-maven-$mvn-bin.tar.gz"
+curl -fsSL "$mvn_base/$mvn/apache-maven-$mvn-bin.tar.gz.sha512" | sed 's/$/  maven.tar.gz/' | sha512sum -c -
+sudo rm -rf /usr/local/maven
+sudo mkdir /usr/local/maven
+sudo tar -xzf maven.tar.gz -C /usr/local/maven --strip-components=1 --no-same-owner
+sudo ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn
+# The current Gradle release.
+gradle_url=$(curl -fsSL https://services.gradle.org/versions/current | sed -n 's|.*"downloadUrl" *: *"\([^"]*\)".*|\1|p')
+curl -fsSLo gradle.zip "$gradle_url"
+curl -fsSL "$gradle_url.sha256" | sed 's/$/  gradle.zip/' | sha256sum -c -
+unzip -q gradle.zip
+sudo rm -rf /usr/local/gradle
+sudo mv gradle-* /usr/local/gradle
+sudo ln -sf /usr/local/gradle/bin/gradle /usr/local/bin/gradle
+java -version 2>&1 | head -n1
+mvn --version | head -n1
+gradle --version | grep '^Gradle'
+'''

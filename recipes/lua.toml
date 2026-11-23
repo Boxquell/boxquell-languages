@@ -1,0 +1,21 @@
+name = "Lua"
+category = "language"
+description = "Lua interpreter and compiler, built from source into /usr/local"
+icon = "lua.svg"
+os = ["debian", "ubuntu"]
+versions = ["5.5", "5.4"]
+requires = ["build-essential"]
+install_allow = ["@packages", "www.lua.org"]
+install = '''
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends ca-certificates curl libreadline-dev
+# The newest patch release of the chosen minor version, from the download page.
+version=$(curl -fsSL https://www.lua.org/ftp/ | grep -o "lua-$BOXQUELL_VERSION\.[0-9]*\.tar\.gz" | sort -uV | tail -n1)
+[ -n "$version" ] || { echo "no Lua $BOXQUELL_VERSION release found" >&2; exit 1; }
+cd "$(mktemp -d)"
+curl -fsSLO "https://www.lua.org/ftp/$version"
+tar -xzf "$version" --strip-components=1
+make -j"$(nproc)" linux
+sudo make install
+lua -v
+'''

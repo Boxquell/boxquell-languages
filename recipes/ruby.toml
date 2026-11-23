@@ -1,0 +1,28 @@
+name = "Ruby"
+category = "language"
+description = "Ruby with gem and bundler, built from source into /usr/local"
+icon = "ruby.svg"
+os = ["debian", "ubuntu"]
+versions = ["4.0", "3.4", "3.3"]
+requires = ["build-essential"]
+install_allow = ["@packages", "cache.ruby-lang.org"]
+allow = ["rubygems.org", "index.rubygems.org", "*.rubygems.org"]
+install = '''
+# Built from the official source tarball, so every version works on every supported system.
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends \
+  ca-certificates curl xz-utils libssl-dev libyaml-dev zlib1g-dev libffi-dev libreadline-dev libgmp-dev
+# The newest patch release of the chosen minor version, with its checksum from the release index.
+line=$(curl -fsSL https://cache.ruby-lang.org/pub/ruby/index.txt | awk -F'\t' -v p="ruby-$BOXQUELL_VERSION." 'index($1, p) == 1 && $2 ~ /\.tar\.xz$/ && $1 ~ /^ruby-[0-9.]+$/' | sort -V | tail -n1)
+[ -n "$line" ] || { echo "no Ruby $BOXQUELL_VERSION release found" >&2; exit 1; }
+url=$(echo "$line" | cut -f2)
+sha=$(echo "$line" | cut -f4)
+cd "$(mktemp -d)"
+curl -fsSLo ruby.tar.xz "$url"
+echo "$sha  ruby.tar.xz" | sha256sum -c -
+tar -xJf ruby.tar.xz --strip-components=1
+./configure --prefix=/usr/local --disable-install-doc
+make -j"$(nproc)"
+sudo make install
+ruby --version
+'''

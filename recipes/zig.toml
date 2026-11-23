@@ -1,0 +1,25 @@
+name = "Zig"
+category = "language"
+description = "Zig compiler and build system in /usr/local/zig"
+icon = "zig.svg"
+os = ["debian", "ubuntu"]
+versions = ["0.17", "0.16", "0.15"]
+install_allow = ["@packages", "ziglang.org"]
+install = '''
+case "$(uname -m)" in x86_64|aarch64) arch=$(uname -m) ;; *) echo "unsupported CPU" >&2; exit 1 ;; esac
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends ca-certificates curl xz-utils
+# The newest patch release of the chosen minor version, with its checksum from the download index.
+index=$(curl -fsSL https://ziglang.org/download/index.json)
+version=$(echo "$index" | grep -o "\"$BOXQUELL_VERSION\.[0-9]*\": *{" | grep -o "[0-9][0-9.]*" | sort -V | tail -n1)
+[ -n "$version" ] || { echo "no Zig $BOXQUELL_VERSION release found" >&2; exit 1; }
+sha=$(echo "$index" | tr -d '\n ' | grep -o "\"$version\":{.*" | grep -o "\"$arch-linux\":{[^}]*}" | head -n1 | sed -n 's/.*"shasum":"\([0-9a-f]*\)".*/\1/p')
+cd "$(mktemp -d)"
+curl -fsSLo zig.tar.xz "https://ziglang.org/download/$version/zig-$arch-linux-$version.tar.xz"
+echo "$sha  zig.tar.xz" | sha256sum -c -
+sudo rm -rf /usr/local/zig
+sudo mkdir /usr/local/zig
+sudo tar -xJf zig.tar.xz -C /usr/local/zig --strip-components=1 --no-same-owner
+sudo ln -sf /usr/local/zig/zig /usr/local/bin/zig
+zig version
+'''

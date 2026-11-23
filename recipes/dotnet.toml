@@ -1,0 +1,23 @@
+name = ".NET"
+category = "language"
+description = ".NET SDK with the `dotnet` command, in /usr/local/dotnet"
+icon = "dotnet.svg"
+os = ["debian", "ubuntu"]
+versions = ["10.0", "11.0"]
+install_allow = ["@packages", "dot.net", "builds.dotnet.microsoft.com", "ci.dot.net", "dotnetcli.azureedge.net", "dotnetcli.blob.core.windows.net"]
+allow = ["api.nuget.org", "*.nuget.org"]
+install = '''
+# Microsoft's official install script, which picks the newest SDK of the chosen channel.
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends ca-certificates curl libicu-dev
+cd "$(mktemp -d)"
+curl -fsSLo dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+sudo bash dotnet-install.sh --channel "$BOXQUELL_VERSION" --install-dir /usr/local/dotnet
+sudo ln -sf /usr/local/dotnet/dotnet /usr/local/bin/dotnet
+dotnet --version
+'''
+
+[env]
+DOTNET_ROOT = "/usr/local/dotnet"
+DOTNET_CLI_TELEMETRY_OPTOUT = "1"
+DOTNET_NOLOGO = "1"

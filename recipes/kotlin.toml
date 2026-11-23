@@ -1,0 +1,23 @@
+name = "Kotlin"
+category = "language"
+description = "Kotlin compiler (`kotlinc`) in /usr/local/kotlin; installs the JDK from this repository"
+icon = "kotlin.svg"
+os = ["debian", "ubuntu"]
+versions = ["2.4", "2.3", "2.2"]
+requires = ["java"]
+install_allow = ["@packages", "repo.maven.apache.org", "github.com", "*.githubusercontent.com"]
+allow = ["repo.maven.apache.org", "repo1.maven.org", "plugins.gradle.org"]
+install = '''
+sudo apt-get update -q
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -q --no-install-recommends ca-certificates curl unzip
+# The newest patch release of the chosen minor version.
+version=$(curl -fsSL https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-compiler/maven-metadata.xml | sed -n "s|.*<version>\($BOXQUELL_VERSION\.[0-9]*\)</version>.*|\1|p" | sort -V | tail -n1)
+[ -n "$version" ] || { echo "no Kotlin $BOXQUELL_VERSION release found" >&2; exit 1; }
+cd "$(mktemp -d)"
+curl -fsSLo kotlin.zip "https://github.com/JetBrains/kotlin/releases/download/v$version/kotlin-compiler-$version.zip"
+unzip -q kotlin.zip
+sudo rm -rf /usr/local/kotlin
+sudo mv kotlinc /usr/local/kotlin
+for tool in kotlinc kotlin kotlin-dce-js; do [ -e "/usr/local/kotlin/bin/$tool" ] && sudo ln -sf "/usr/local/kotlin/bin/$tool" /usr/local/bin/; done
+kotlinc -version 2>&1 | tail -n1
+'''

@@ -17,8 +17,17 @@ boxquell repo update languages          # fetch the latest recipes
 | `go` | 1.27, 1.26, 1.25 |
 | `php` | 8.5, 8.4, 8.3, 8.2 (command line with common extensions) |
 | `rust` | stable (rustup) |
+| `ruby` | 4.0, 3.4, 3.3 (built from source) |
+| `java` | 25, 21, 17 (Eclipse Temurin JDK, with Maven and Gradle) |
+| `kotlin` | 2.4, 2.3, 2.2 (installs `java`) |
+| `lua` | 5.5, 5.4 (built from source) |
+| `dotnet` | 10.0, 11.0 (.NET SDK) |
+| `deno` | latest release |
+| `bun` | latest release |
+| `elixir` | 1.20, 1.19, 1.18 (with Erlang/OTP 28) |
+| `zig` | 0.17, 0.16, 0.15 |
 
-Choose a version with `<recipe>@<version>`. Rust needs the C build tools from the [tools](https://github.com/Boxquell/boxquell-tools) repository.
+Choose a version with `<recipe>@<version>`. Rust, Ruby and Lua need the C build tools from the [tools](https://github.com/Boxquell/boxquell-tools) repository.
 
 ## Contributing
 
