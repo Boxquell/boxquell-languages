@@ -1,6 +1,7 @@
 name = "Rust"
 category = "language"
 description = "Stable Rust via rustup (`cargo`, `rustc`)"
+icon = "rust.svg"
 os = ["debian", "ubuntu"]
 requires = ["build-essential"]
 install_allow = ["sh.rustup.rs", "static.rust-lang.org"]
